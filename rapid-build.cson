@@ -1,0 +1,25 @@
+common:
+	build: client: false
+
+	exclude:
+		default:
+			server:
+				files: true
+
+	extra:
+		copy:
+			server: [
+				# '.npmignore'
+				'LICENSE'
+				'CHANGELOG.md'
+				'README.md'
+				'package.json'
+				'package-lock.json'
+			]
+
+	minify:
+		server:
+			js:
+				es6: true
+			json:
+				enable: false

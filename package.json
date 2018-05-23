@@ -1,0 +1,9 @@
+{
+  "name": "utils-proj",
+  "scripts": {
+    "install-server": "cd src/server/ && npm install",
+    "link": "cd dist/server/ && npm link",
+    "unlink": "cd dist/server/ && npm unlink",
+    "preinstall": "npm run install-server"
+  }
+}

@@ -1,2 +1,3 @@
-# utils
-Rapid Build UI utilities for components and showcase site.
+# @rapid-build-ui/utils
+
+&#9874; Rapid Build UI Utilities Project.
