@@ -1,9 +1,17 @@
 /***************************
  * RAPID BUILD UI UTILITIES
  ***************************/
+require('./bootstrap/colors');
+
 const Utils = {
-	test() {
-		console.log('Rapid Build UI Utilities');
+	travis: {
+		components: {
+			async continuous(config) { // :Promise{}
+				const steps = require('./travis/component-steps');
+				await steps.buildComponent(config.paths);
+				await steps.triggerShowcaseBuild(config.tokens.travis, config.repoName);
+			}
+		}
 	}
 };
 
