@@ -9,10 +9,6 @@ common:
 	extra:
 		copy:
 			server: [
-				# '.npmignore'
-				'LICENSE'
-				'CHANGELOG.md'
-				'README.md'
 				'package.json'
 				'package-lock.json'
 			]

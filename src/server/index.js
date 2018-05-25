@@ -15,6 +15,7 @@ const Utils = {
 			async release(config) { // :Promise<any>
 				const steps = require('./travis/component-steps');
 				await steps.buildComponent(config.paths);
+				await steps.copyRootFilesToDist(config.paths);
 			}
 		}
 	}
