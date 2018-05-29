@@ -1,0 +1,82 @@
+# ================================
+# COMMON SETUP
+# ================================
+# Travis only runs when:
+# - Commit to "continuous" branch.
+# - Valid semver tag is created.
+# ================================
+# TOKENS AVAILABLE
+# Added via web gui -> settings
+# ================================
+# NPM_TOKEN
+# ================================
+language: node_js
+
+node_js:
+  - '8'
+
+env:
+  global:
+    # Versions
+    - NPM_VERSION="6.1.0"
+    # Directories
+    - RB_PROJECT_DIR="$TRAVIS_BUILD_DIR"
+    - RB_DIST_DIR="dist/server"
+    - RB_REPO_NAME="$TRAVIS_REPO_SLUG"
+
+cache:
+  directories:
+    - node_modules     # repo root node_modules
+    - "$(npm root -g)" # global node_modules directory
+    - "$(npm bin -g)/rapid-build"
+
+# Install Global Dependencies
+# ===========================
+before_install:
+  - if [[ $(npm -v) != $NPM_VERSION ]]; then npm install -g npm@${NPM_VERSION}; fi # version check
+  - if [[ -z $(command -v rapid-build) ]]; then npm install -g rapid-build@5; fi   # if not installed
+
+# ===================================
+# SPECIFIC JOBS
+# ===================================
+# - before_script:
+#   Runs after npm install.
+#   Stops build immediately on error.
+# - Release Job:
+#   Must be a valid semver tag.
+#   Examples: v1.0.0 or v1.0.0-beta.1
+# ===================================
+jobs:
+  include:
+    # Continuous
+    # ==========
+    - if: branch = continuous
+      before_script:
+        # STEPS (in order)
+        # ================
+        # Build Package
+        # Copy Root Files To: dist/server/ (ex: LICENSE)
+        - rapid-build prod
+        - node scripts/ci/continuous $RB_PROJECT_DIR $RB_DIST_DIR
+
+    # Release
+    # =======
+    - if: tag =~ ^v(\d+\.)(\d+\.)(\d+)(-([A-Za-z]+\.)?(\d+\.)?(\d+\.)?(\d+))?$
+      before_script:
+        # STEPS (in order)
+        # ================
+        # Build Package
+        # Copy Root Files To: dist/server/ (ex: LICENSE)
+        - rapid-build prod
+        - node scripts/ci/release $RB_PROJECT_DIR $RB_DIST_DIR
+      before_deploy:
+        - cd $RB_PROJECT_DIR/$RB_DIST_DIR # run npm publish from here
+      after_deploy:
+        - cd $RB_PROJECT_DIR
+      deploy:
+        provider: npm
+        skip_cleanup: true
+        email: rapidbuildui@yahoo.com
+        on:
+          tags: true
+        api_key: $NPM_TOKEN

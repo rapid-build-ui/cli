@@ -1,5 +1,6 @@
-/* TEMPLATE TAGS HELPER
- ***********************/
+/****************
+ * TEMPLATE TAGS
+ ****************/
 const stripAnsi = require('strip-ansi');
 
 // Helpers

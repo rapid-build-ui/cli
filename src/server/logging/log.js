@@ -1,6 +1,6 @@
-/**********************
- * RAPID BUILD LOGGING
- **********************/
+/**********
+ * LOGGING
+ **********/
 const template = require('./template-tags');
 const { log, info, error } = require('./console');
 
@@ -27,7 +27,7 @@ const Log = {
 		const after  = Helpers.getAfter(opts);
 		const before = Helpers.getBefore(opts);
 		if (before) log(before);
-		info(template.separate`begin ${msg}`.toUpperCase().alert);
+		info(template.separate`begin: ${msg}`.toUpperCase().alert);
 		if (after) log(after);
 	},
 
@@ -36,7 +36,7 @@ const Log = {
 		const after  = Helpers.getAfter(opts);
 		const before = Helpers.getBefore(opts);
 		if (before) log(before);
-		error(template.separate`✘ error ${msg}`.toUpperCase().error);
+		error(template.separate`✘ error: ${msg}`.toUpperCase().error);
 		if (after) log(after);
 		if (exit) process.exit(1);
 		log();
@@ -46,7 +46,7 @@ const Log = {
 		const after  = Helpers.getAfter(opts);
 		const before = Helpers.getBefore(opts);
 		if (before) log(before);
-		info(template.separate`✔ ${msg}`.toUpperCase().alert);
+		info(template.separate`✔ success: ${msg}`.toUpperCase().alert);
 		if (after) log(after);
 		log();
 	}
