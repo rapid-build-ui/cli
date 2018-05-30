@@ -9,10 +9,10 @@ module.exports = args => { // config{}
 	return {
 		name: 'component',
 		paths: {
-			// dist: args[1],
-			// project: args[0]
-			dist: 'dist/server',
-			project: '/Users/jyounce/dev/packages/rapid-build-ui/rb-alert'
+			dist: args[1],
+			project: args[0]
+			// dist: 'dist/server',
+			// project: '/Users/jyounce/dev/packages/rapid-build-ui/rb-alert'
 		}
 	}
 };

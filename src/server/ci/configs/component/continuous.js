@@ -12,10 +12,10 @@ module.exports = args => { // config{}
 		name: 'component',
 		repoName: args[2],
 		paths: {
-			// dist: args[1],
-			// project: args[0]
-			dist: 'dist/client',
-			project: '/Users/jyounce/dev/packages/rapid-build-ui/rb-alert'
+			dist: args[1],
+			project: args[0]
+			// dist: 'dist/client',
+			// project: '/Users/jyounce/dev/packages/rapid-build-ui/rb-alert'
 		},
 		tokens: {
 			travis: args[3]
