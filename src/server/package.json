@@ -8,6 +8,9 @@
     "npm": "6.x",
     "node": "8.x"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "contributors": [
     {
       "name": "Judd Younce",
