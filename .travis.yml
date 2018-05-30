@@ -57,7 +57,7 @@ jobs:
         # Build Package
         # Copy Root Files To: dist/server/ (ex: LICENSE)
         - rapid-build prod
-        - node scripts/ci/continuous $RB_PROJECT_DIR $RB_DIST_DIR
+        - npm run build-continuous $RB_PROJECT_DIR $RB_DIST_DIR
 
     # Release
     # =======
@@ -68,7 +68,7 @@ jobs:
         # Build Package
         # Copy Root Files To: dist/server/ (ex: LICENSE)
         - rapid-build prod
-        - node scripts/ci/release $RB_PROJECT_DIR $RB_DIST_DIR
+        - npm run build-release $RB_PROJECT_DIR $RB_DIST_DIR
       before_deploy:
         - cd $RB_PROJECT_DIR/$RB_DIST_DIR # run npm publish from here
       after_deploy:

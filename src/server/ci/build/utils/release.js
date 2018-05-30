@@ -1,5 +1,5 @@
 /********************************
- * CI RELEASE BUILD
+ * CI RELEASE BUILD: UTILS
  ********************************
  * - Arguments Array:
  *   0. RB_PROJECT_DIR
@@ -7,13 +7,13 @@
  ********************************/
 !async function() {
 	const args   = process.argv.slice(2);
-	const { ci } = require('../../dist/server/');
+	const { ci } = require('../../../index');
 	await ci.utils.release({
 		paths: {
-			dist: args[1],
-			project: args[0]
-			// dist: 'dist/server',
-			// project: '/Users/jyounce/dev/packages/rapid-build-ui/utils'
+			// dist: args[1],
+			// project: args[0]
+			dist: 'dist/server',
+			project: '/Users/jyounce/dev/packages/rapid-build-ui/utils'
 		}
 	});
 }();

@@ -4,7 +4,7 @@
 require('./bootstrap/colors');
 
 const Utils = {
-	ci: require('./ci/builds')
+	ci: require('./ci/ci-builds')
 };
 
 /* Export It!
