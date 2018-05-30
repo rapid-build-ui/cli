@@ -1,8 +1,8 @@
 {
   "name": "utils-proj",
   "scripts": {
-	"build-continuous": "node dist/server/ci/build/utils/continuous",
-	"build-release": "node dist/server/ci/build/utils/release",
+	"build-continuous": "node dist/server/ci/build utils continuous",
+	"build-release": "node dist/server/ci/build utils release",
     "install-server": "cd src/server/ && npm install",
     "link": "cd dist/server/ && npm link",
     "unlink": "cd dist/server/ && npm unlink",

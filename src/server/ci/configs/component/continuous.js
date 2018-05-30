@@ -1,16 +1,15 @@
-/**********************************
- * CI CONTINUOUS BUILD: COMPONENTS
- **********************************
+/****************************************
+ * CI BUILD CONFIG: COMPONENT CONTINUOUS
+ ****************************************
  * - Arguments Array:
  *   0. RB_PROJECT_DIR
  *   1. RB_DIST_DIR: dist/client
  *   2. RB_REPO_NAME
  *   3. TRAVIS_TOKEN
- **********************************/
-!async function() {
-	const args   = process.argv.slice(2);
-	const { ci } = require('../../../index');
-	await ci.components.continuous({
+ ****************************************/
+module.exports = args => { // config{}
+	return {
+		name: 'component',
 		repoName: args[2],
 		paths: {
 			// dist: args[1],
@@ -21,5 +20,5 @@
 		tokens: {
 			travis: args[3]
 		}
-	});
-}();
+	}
+};

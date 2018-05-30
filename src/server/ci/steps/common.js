@@ -9,15 +9,15 @@ const log  = require('../../logging/log');
 /* Steps
  ********/
 const Steps = {
-	buildDist(paths) { // :Promise{}
-		log.buildStepBegin('building dist');
+	buildDist(paths, name='dist') { // :Promise{}
+		log.buildStepBegin(`building ${name}`);
 		const cmd  = 'rapid-build prod';
 		const opts = { cwd: paths.project };
 		return exec(cmd, opts).then(results => {
-			log.buildStepSuccess('built dist', { before: results.stdout, trim: { before: true }});
+			log.buildStepSuccess(`built ${name}`, { before: results.stdout, trim: { before: true }});
 			return results;
 		}).catch(e => {
-			log.buildStepError('building dist', { after: e, exit: true });
+			log.buildStepError(`building ${name}`, { after: e, exit: true });
 			return e;
 		});
 	},
@@ -29,10 +29,10 @@ const Steps = {
 		const opts = { cwd: paths.project };
 		return cpy(src, dest, opts).then(results => {
 			const total = results.length;
-			log.buildStepSuccess(`copied ${total} project root files to ${paths.dist}`);
+			log.buildStepSuccess(`copied ${total} root files to ${paths.dist}`);
 			return total;
 		}).catch(e => {
-			log.buildStepError(`copying project root files to ${paths.dist}`, { after: e, exit: true });
+			log.buildStepError(`copying root files to ${paths.dist}`, { after: e, exit: true });
 			return e;
 		});
 	}
