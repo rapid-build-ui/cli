@@ -11,7 +11,7 @@ module.exports = args => { // config{}
 		paths: {
 			dist: args[1],
 			project: args[0]
-			// dist: 'dist/server',
+			// dist: 'dist/client',
 			// project: '/Users/jyounce/dev/packages/rapid-build-ui/rb-alert'
 		}
 	}

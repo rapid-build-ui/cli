@@ -4,7 +4,7 @@
 const util    = require('util');
 const request = require('request');
 const post    = util.promisify(request.post);
-const log     = require('../../logging/log');
+const log     = require('../../common/logging/log');
 
 /* Steps
  ********/

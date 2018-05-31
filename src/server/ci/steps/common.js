@@ -4,14 +4,14 @@
 const util = require('util');
 const cpy  = require('cpy');
 const exec = util.promisify(require('child_process').exec);
-const log  = require('../../logging/log');
+const log  = require('../../common/logging/log');
 
 /* Steps
  ********/
 const Steps = {
 	buildDist(paths, name='dist') { // :Promise{}
 		log.buildStepBegin(`building ${name}`);
-		const cmd  = 'rapid-build prod';
+		const cmd  = 'rapid-build prod publish';
 		const opts = { cwd: paths.project };
 		return exec(cmd, opts).then(results => {
 			log.buildStepSuccess(`built ${name}`, { before: results.stdout, trim: { before: true }});
