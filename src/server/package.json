@@ -1,6 +1,6 @@
 {
   "name": "@rapid-build-ui/utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Rapid Build UI utilities for components and showcase site.",
   "license": "MIT",
   "main": "index.js",
