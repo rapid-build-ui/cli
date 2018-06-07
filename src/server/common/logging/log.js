@@ -74,6 +74,15 @@ const Log = {
 		if (before) log(before);
 		info(template.unindent`${msg}`.success);
 		if (after) log(after);
+	},
+	pretty(msg, opts={}) {
+		const type = opts.type || 'info'; // pretty colors
+		msg = JSON.stringify(msg, null, 2);
+		msg = opts.prefix ? `${opts.prefix} = ${msg}`: msg;
+		msg = msg[type];
+		log(msg);
+		log(); // bottom bumper
+		if (opts.exit) process.exit();
 	}
 }
 

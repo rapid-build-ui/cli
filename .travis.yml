@@ -1,15 +1,15 @@
-# ================================
+# ===============================
 # COMMON SETUP
-# ================================
-# Travis only runs when:
-# - Commit to "continuous" branch.
-# - Valid semver tag is created.
-# ================================
+# ===============================
+# Travis only runs on commit to:
+# - continuous branch
+# - master branch (for releases)
+# ===============================
 # TOKENS AVAILABLE
-# Added via web gui -> settings
-# ================================
-# NPM_TOKEN
-# ================================
+# - Added via web gui -> settings
+# - GITHUB_TOKEN
+# - NPM_TOKEN
+# ===============================
 language: node_js
 
 node_js:
@@ -17,12 +17,9 @@ node_js:
 
 env:
   global:
-    # Versions
     - NPM_VERSION="6.1.0"
-    # Directories
-    - RB_PROJECT_DIR="$TRAVIS_BUILD_DIR"
-    - RB_DIST_DIR="dist/server"
-    - RB_REPO_NAME="$TRAVIS_REPO_SLUG"
+    - RB_REPO_SLUG="$TRAVIS_REPO_SLUG"
+    - RB_PROJECT_PATH="$TRAVIS_BUILD_DIR"
 
 cache:
   directories:
@@ -42,9 +39,6 @@ before_install:
 # - before_script:
 #   Runs after npm install.
 #   Stops build immediately on error.
-# - Release Job:
-#   Must be a valid semver tag.
-#   Examples: v1.0.0 or v1.0.0-beta.1
 # ===================================
 jobs:
   include:
@@ -52,31 +46,24 @@ jobs:
     # ==========
     - if: branch = continuous
       before_script:
-        # STEPS (in order)
-        # ================
-        # Build Package
-        # Copy Root Files To: dist/server/ (ex: LICENSE)
+        # build package
+        # copy root files to: dist/server/ (ex: LICENSE)
         - rapid-build prod publish
-        - npm run build-continuous $RB_PROJECT_DIR $RB_DIST_DIR
+        - npm run build-continuous
 
     # Release
     # =======
-    - if: tag =~ ^v(\d+\.)(\d+\.)(\d+)(-([A-Za-z]+\.)?(\d+\.)?(\d+\.)?(\d+))?$
+    - if: branch = master
       before_script:
-        # STEPS (in order)
-        # ================
-        # Build Package
-        # Copy Root Files To: dist/server/ (ex: LICENSE)
+        # build package
         - rapid-build prod publish
-        - npm run build-release $RB_PROJECT_DIR $RB_DIST_DIR
-      before_deploy:
-        - cd $RB_PROJECT_DIR/$RB_DIST_DIR # run npm publish from here
-      after_deploy:
-        - cd $RB_PROJECT_DIR
       deploy:
-        provider: npm
+        # copy root files to: dist/server/
+        # copy npm config to dist/server/
+        # publish npm package from dist/server/
+        # publish github release from master
+        script: npm run build-release
+        provider: script
         skip_cleanup: true
-        email: rapidbuildui@yahoo.com
         on:
-          tags: true
-        api_key: $NPM_TOKEN
+          branch: master

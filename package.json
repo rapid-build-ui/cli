@@ -4,7 +4,7 @@
   "scripts": {
     "build-continuous": "node dist/server/ci utils continuous",
     "build-release": "node dist/server/ci utils release",
-    "bump": "node dist/server/bump utils",
+    "bump": "node dist/server/bump utils patch",
     "install-server": "cd src/server/ && npm install",
     "link": "cd dist/server/ && npm link",
     "unlink": "cd dist/server/ && npm unlink",
