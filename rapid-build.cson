@@ -11,6 +11,7 @@ common:
 			server: [
 				'package.json'
 				'package-lock.json'
+				'common/templates/**'
 			]
 
 	minify:
@@ -19,3 +20,14 @@ common:
 				es6: true
 			json:
 				enable: false
+
+# RUN BEFORE PUBLISHING TO NPM!!
+# rapid-build prod publish
+# ==============================
+publish:
+	exclude:
+		from:
+			dist:
+				server: [
+					'ci/testing/**'
+				]

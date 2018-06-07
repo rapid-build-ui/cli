@@ -6,13 +6,14 @@ const request = require('request');
 const post    = util.promisify(request.post);
 const log     = require('../../common/logging/log');
 
-/* Steps
- ********/
+/* API
+ ******/
 const Steps = {
-	triggerShowcaseBuild(repoName, tokens) { // :Promise{}
+	triggerShowcaseBuild(config) { // :Promise{}
+		const { repo, tokens } = config;
 		log.buildStepBegin('triggering showcase build');
-		repoName   = repoName.split('/')[1]; // ex: rapid-build-ui/rb-alert -> rb-alert
-		const url  = 'https://api.travis-ci.org/repo/rapid-build-ui%2Frapid-build-ui.io/requests';
+		const slug = `${repo.owner}%2Frapid-build-ui.io` // showcase repo slug formatted for travis api
+		const url  = `https://api.travis-ci.org/repo/${slug}/requests`;
 		const opts = {
 			url,
 			json: true,
@@ -23,7 +24,7 @@ const Steps = {
 			body: {
 				request: {
 					branch:  'continuous',
-					message: `REBUILD TRIGGERED - ${repoName}`
+					message: `REBUILD TRIGGERED - ${repo.name}`
 				}
 			}
 		};
