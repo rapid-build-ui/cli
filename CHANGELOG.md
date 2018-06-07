@@ -1,3 +1,12 @@
+## [0.0.3](https://github.com/rapid-build-ui/utils/compare/v0.0.2...v0.0.3) (2018-06-07)
+
+
+### Features
+
+* **ci automation tasks:** complete for all rb components and utils package ([64a31ed](https://github.com/rapid-build-ui/utils/commit/64a31ed))
+
+
+
 ## [0.0.2](https://github.com/rapid-build-ui/utils/compare/v0.0.1...v0.0.2) (2018-05-31)
 
 
