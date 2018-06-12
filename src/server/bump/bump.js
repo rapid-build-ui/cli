@@ -10,21 +10,34 @@ const exec   = util.promisify(require('child_process').exec);
 /* Bump
  *******/
 const Bump = {
-	pkgs(pkgDirs, newVersion) { // :Promise[{}]
+	async pkgs(config) { // :Promise[{}]
+		const { paths, versions } = config;
+		const newVersion = versions.new;
 		log.buildStepBegin(`BUMPING VERSION TO v${newVersion}`, { matchCase: true });
-		let promises = [];
-		const cmd    = `npm version ${newVersion} --no-git-tag-version`;
-		for (const [loc, dir] of Object.entries(pkgDirs)) {
-			const opts    = { cwd: dir };
+		const pkgDirPaths = {
+			project: paths.abs.project,
+			client:  paths.rel.src.client,
+			server:  paths.rel.src.server
+		}
+		const promises = [];
+		const cmd      = `npm version ${newVersion} --no-git-tag-version`;
+		for (const [loc, pkgDirPath] of Object.entries(pkgDirPaths)) {
+			const pkgPath = `${pkgDirPath}/package.json`;
+			const exists  = await fse.pathExists(pkgPath);
+			if (!exists) {
+				delete pkgDirPaths[loc]
+				continue;
+			}
+			const opts    = { cwd: pkgDirPath };
 			const promise = exec(cmd, opts);
 			promises.push(promise);
 		}
 		return Promise.all(promises).then(results => {
 			const _newVersion = results[0].stdout.trim();
 			log.buildStepSuccess(`BUMPED VERSION ${_newVersion}`, { matchCase: true });
-			const locs = Object.keys(pkgDirs);
+			const locs = Object.keys(pkgDirPaths);
 			for (const [i, result] of results.entries()) {
-				const pkgPath = `${pkgDirs[locs[i]]}/package.json`;
+				const pkgPath = `${pkgDirPaths[locs[i]]}/package.json`;
 				console.log(`${i+1}. ${pkgPath}`.info)
 			}
 			return results;
@@ -33,8 +46,32 @@ const Bump = {
 		});
 	},
 
+	async showcaseVersionsFile(config) { // :Promise<boolean>
+		const { paths, versions } = config;
+		log.buildStepBegin(`updating showcase versions file`);
+		const newVersion   = versions.new;
+		const showcaseFile = paths.rel.src.showcaseFile;
+		let newVersions = {
+			showcase: newVersion,
+			// components: {} TODO
+		};
+		try {
+			let contents = await fse.readFile(showcaseFile, 'utf8');
+				contents = contents.replace(
+					/{[^]*?}(?![^]*?})/,
+					JSON.stringify(newVersions, null, '\t')
+				);
+			await fse.writeFile(showcaseFile, contents);
+			log.buildStepSuccess(`updated ${showcaseFile}`, { matchCase: true });
+			return true;
+		} catch(e) {
+			log.buildStepError(`updating ${showcaseFile}`, { after: e, exit: true, matchCase: true });
+			return e;
+		}
+	},
+
 	validate(versions) { // :{}
-		let result = {
+		const result = {
 			eMsg:  null,
 			valid: true,
 			newVersion: null
@@ -74,12 +111,16 @@ const Bump = {
 /* API
  ******/
 const Api = {
-	getNewVersion(versions) { // :string (semver version)
+	getNewVersion(config) { // :string (semver version)
+		const { versions } = config;
 		const result = Bump.validate(versions);
 		return result.newVersion;
 	},
-	async versions(pkgDirs, versions) { // :Promise<any>
-		await Bump.pkgs(pkgDirs, versions.new);
+
+	async versions(config) { // :Promise<any>
+		await Bump.pkgs(config);
+		if (config.type !== 'showcase') return;
+		await Bump.showcaseVersionsFile(config);
 	}
 };
 
