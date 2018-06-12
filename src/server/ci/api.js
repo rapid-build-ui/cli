@@ -15,7 +15,7 @@ const CI = { // :Promise<any> (all return)
 			await ci.common.copyRootFilesToDist(config, 'client');
 			await ci.common.copyNpmConfigToDist(config, 'client');
 			await ci.common.publishNpmPkg(config, 'client');
-			await ci.common.publishGithubRelease(config, 'client');
+			await ci.common.publishGithubRelease(config);
 		}
 	},
 	utils: {
@@ -26,13 +26,27 @@ const CI = { // :Promise<any> (all return)
 			await ci.common.copyRootFilesToDist(config, 'server');
 			await ci.common.copyNpmConfigToDist(config, 'server');
 			await ci.common.publishNpmPkg(config, 'server');
-			await ci.common.publishGithubRelease(config, 'server');
+			await ci.common.publishGithubRelease(config);
 		}
 	},
-	// TODO: Next!
 	showcase: {
-		async continuous(config) {},
-		async release(config) {}
+		async continuous(config) {
+			await ci.showcase.createDirForClonedComponents(config);
+			await ci.showcase.cloneComponentRepos(config);
+			await ci.showcase.setupComponents(config);
+			await ci.showcase.setupShowcase(config);
+			await ci.common.buildDist(config);
+			await ci.showcase.createHerokuPkgJson(config);
+			await ci.showcase.publishHerokuApp(config, 'dev');
+		},
+		async release(config) {
+			await ci.showcase.installClient(config);
+			await ci.showcase.installServer(config);
+			await ci.common.buildDist(config);
+			await ci.showcase.createHerokuPkgJson(config);
+			await ci.showcase.publishToHeroku(config, 'staging');
+			await ci.common.publishGithubRelease(config);
+		}
 	}
 };
 

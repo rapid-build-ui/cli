@@ -1,6 +1,8 @@
 /*******************
  * CI COMMON CONFIG
  *******************/
+const path = require('path');
+
 const getConfig = () => { // :{}
 	try { require('./testing/ci-env-vars'); } catch(e) {}
 
@@ -26,12 +28,18 @@ const getConfig = () => { // :{}
 			travis: env.TRAVIS_TOKEN  // components
 		},
 		paths: {
-			project: projPath, // absolute path
 			abs: {
+				project:    projPath,
+				components: `${projPath}/.rb-components`, // showcase
 				dist: {
 					root:   `${projPath}/dist`,
 					client: `${projPath}/dist/client`,
 					server: `${projPath}/dist/server`
+				},
+				src: {
+					root:   `${projPath}/src`,
+					client: `${projPath}/src/client`,
+					server: `${projPath}/src/server`
 				}
 			},
 			rel: { // all relative to project path
@@ -39,6 +47,11 @@ const getConfig = () => { // :{}
 					root:   'dist',
 					client: 'dist/client',
 					server: 'dist/server'
+				},
+				src: {
+					root:   'src',
+					client: 'src/client',
+					server: 'src/server'
 				}
 			}
 		}

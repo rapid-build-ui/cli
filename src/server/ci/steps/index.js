@@ -3,7 +3,8 @@
  ***********/
 const Steps = {
 	common:    require('./common'),
-	component: require('./component')
+	component: require('./component'),
+	showcase:  require('./showcase')
 };
 
 /* Export It!
