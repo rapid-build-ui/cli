@@ -19,7 +19,7 @@ const Steps = {
 		const { paths, repo } = config;
 		log.buildStepBegin(`building ${repo.name}`);
 		const cmd  = 'rapid-build prod publish';
-		const opts = { cwd: paths.project };
+		const opts = { cwd: paths.abs.project };
 		return exec(cmd, opts).then(results => {
 			log.buildStepSuccess(`built ${repo.name}`, { before: results.stdout, trim: { before: true }});
 			return results;
@@ -35,7 +35,7 @@ const Steps = {
 		log.buildStepBegin(`copying root files to ${distPath}`);
 		const src  = ['.npmignore', 'LICENSE', 'CHANGELOG.md', 'README.md'];
 		const dest = distPath;
-		const opts = { cwd: paths.project };
+		const opts = { cwd: paths.abs.project };
 		return cpy(src, dest, opts).then(results => {
 			const total = results.length;
 			log.buildStepSuccess(`copied ${total} root files to ${distPath}`);
@@ -81,10 +81,10 @@ const Steps = {
 		});
 	},
 
-	async publishGithubRelease(config, distLoc) { // :Promise{}
+	async publishGithubRelease(config) { // :Promise{}
 		const { paths, repo, tokens } = config;
-		const version        = pkgHelp.getVersion(paths.abs.dist[distLoc], true); // ex: v0.0.2
-		const changelogEntry = await changelogHelp.getEntry(paths.project, version);
+		const version        = pkgHelp.getVersion(paths.abs.project, true); // ex: v0.0.2
+		const changelogEntry = await changelogHelp.getEntry(paths.abs.project, version);
 		const url            = `https://api.github.com/repos/${repo.slug}/releases`;
 		log.buildStepBegin(`PUBLISHING GITHUB RELEASE ${version}`, { matchCase: true });
 		const opts = {
