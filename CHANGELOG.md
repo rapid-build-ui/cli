@@ -1,3 +1,12 @@
+## [0.0.5](https://github.com/rapid-build-ui/utils/compare/v0.0.4...v0.0.5) (2018-06-12)
+
+
+### Bug Fixes
+
+* **cloning showcase components:** add .git at the end of the component repo url ([401aba3](https://github.com/rapid-build-ui/utils/commit/401aba3))
+
+
+
 ## [0.0.4](https://github.com/rapid-build-ui/utils/compare/v0.0.3...v0.0.4) (2018-06-12)
 
 
