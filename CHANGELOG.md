@@ -1,3 +1,12 @@
+## [0.0.6](https://github.com/rapid-build-ui/utils/compare/v0.0.5...v0.0.6) (2018-06-12)
+
+
+### Features
+
+* **showcase:** bump the showcase version file along with it's package.json(s) ([f0258d9](https://github.com/rapid-build-ui/utils/commit/f0258d9))
+
+
+
 ## [0.0.5](https://github.com/rapid-build-ui/utils/compare/v0.0.4...v0.0.5) (2018-06-12)
 
 
