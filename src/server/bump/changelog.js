@@ -13,7 +13,7 @@ const Changelog = {
 			log.buildStepBegin(`generating changelog`);
 			let changes = '';
 			const opts  = {
-				preset: 'angular', // reads version from root package.json
+				preset: 'angular', // reads version from project root package.json, process.cwd()
 				// releaseCount: 0,                         // create all changelog
 				// pkg: { path: 'src/server/package.json' } // for specific package.json
 			};

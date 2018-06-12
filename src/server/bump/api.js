@@ -3,33 +3,16 @@
  ***************/
 const bump      = require('./bump');
 const changelog = require('./changelog');
-
-/* Helpers
- **********/
-const Helpers = {
-	getVersions(config, bumpVersion) { // :{}
-		const rootPkg = require(`${config.pkgDirs.root}/package.json`);
-		let versions  = {
-			current: rootPkg.version,
-			new:     null,
-			bump:    bumpVersion
-		}
-		versions.new = bump.getNewVersion(versions);
-		return versions;
-	},
-	getConfig(type, bumpVersion) { // :{}
-		let config      = require(`./configs/${type}`);
-		config.versions = this.getVersions(config, bumpVersion);
-		return config;
-	}
-}
+const getConfig = require('./config'); // getConfig()
+const log       = require('../common/logging/log');
 
 /* Bump
  *******/
 const Bump = {
 	async run(type, bumpVersion) { // :Promise<any>
-		const config = Helpers.getConfig(type, bumpVersion);
-		await bump.versions(config.pkgDirs, config.versions);
+		const config = getConfig(type, bumpVersion);
+		// log.pretty(config, { prefix: 'CONFIG', exit: true });
+		await bump.versions(config);
 		await changelog.update();
 	},
 };

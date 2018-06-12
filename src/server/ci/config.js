@@ -1,8 +1,6 @@
 /*******************
  * CI COMMON CONFIG
  *******************/
-const path = require('path');
-
 const getConfig = () => { // :{}
 	try { require('./testing/ci-env-vars'); } catch(e) {}
 
