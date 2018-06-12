@@ -16,7 +16,7 @@ const Showcase = {
 		for (const [dep, version] of Object.entries(pkg.dependencies)) {
 			if (!dep.includes(SCOPED_NAME)) continue;
 			const name      = dep.replace(`${SCOPED_NAME}/`,'');
-			const githubUrl = `${REPO_PREFIX}/${name}`;
+			const githubUrl = `${REPO_PREFIX}/${name}.git`;
 			components.push({
 				name,
 				githubUrl
