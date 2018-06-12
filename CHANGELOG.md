@@ -1,3 +1,12 @@
+## [0.0.4](https://github.com/rapid-build-ui/utils/compare/v0.0.3...v0.0.4) (2018-06-12)
+
+
+### Features
+
+* **showcase:** complete the ci.showcase methods and add showcase bump support ([42c4f32](https://github.com/rapid-build-ui/utils/commit/42c4f32))
+
+
+
 ## [0.0.3](https://github.com/rapid-build-ui/utils/compare/v0.0.2...v0.0.3) (2018-06-07)
 
 

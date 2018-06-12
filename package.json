@@ -1,6 +1,6 @@
 {
   "name": "utils-project",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "build-continuous": "node dist/server/ci utils continuous",
     "build-release": "node dist/server/ci utils release",
