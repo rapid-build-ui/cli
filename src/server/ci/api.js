@@ -44,7 +44,7 @@ const CI = { // :Promise<any> (all return)
 			await ci.showcase.installServer(config);
 			await ci.common.buildDist(config);
 			await ci.showcase.createHerokuPkgJson(config);
-			await ci.showcase.publishToHeroku(config, 'staging');
+			await ci.showcase.publishHerokuApp(config, 'staging');
 			await ci.common.publishGithubRelease(config);
 		}
 	}
