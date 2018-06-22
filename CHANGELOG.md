@@ -1,3 +1,12 @@
+## [0.0.7](https://github.com/rapid-build-ui/utils/compare/v0.0.6...v0.0.7) (2018-06-22)
+
+
+### Bug Fixes
+
+* **ci showcase release:** via correcting ci.showcase.publishHerokuApp method name ([0b19fcf](https://github.com/rapid-build-ui/utils/commit/0b19fcf))
+
+
+
 ## [0.0.6](https://github.com/rapid-build-ui/utils/compare/v0.0.5...v0.0.6) (2018-06-12)
 
 
