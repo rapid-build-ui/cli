@@ -1,3 +1,14 @@
+## [0.0.8](https://github.com/rapid-build-ui/utils/compare/v0.0.7...v0.0.8) (2018-09-06)
+
+
+### Bug Fixes
+
+* **changelogHelp.getEntry():** match for semver version values > 9 ([fa0c5e8](https://github.com/rapid-build-ui/utils/commit/fa0c5e8))
+
+	Fixes publishGithubRelease() from including to many version entries in the release notes.
+
+
+
 ## [0.0.7](https://github.com/rapid-build-ui/utils/compare/v0.0.6...v0.0.7) (2018-06-22)
 
 
