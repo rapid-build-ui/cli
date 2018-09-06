@@ -17,7 +17,7 @@ node_js:
 
 env:
   global:
-    - NPM_VERSION="6.1.0"
+    - NPM_VERSION="6.4.1"
     - RB_REPO_SLUG="$TRAVIS_REPO_SLUG"
     - RB_PROJECT_PATH="$TRAVIS_BUILD_DIR"
 

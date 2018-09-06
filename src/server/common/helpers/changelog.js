@@ -6,7 +6,7 @@ const fse = require('fs-extra');
 /* API
  ******/
 const Changelog = {
-	/* REGEX UNESCAPED: /^(?:#{1,2} \[5\.0\.3\].*)(?:([\s\S]+?)(?:#{1,2} \[\d\.\d\.\d\].*)|([\s\S]*))$/m
+	/* REGEX UNESCAPED: /^(?:#{1,2} \[5\.0\.3\].*)(?:([\s\S]+?)(?:#{1,2} \[\d*\.\d*\.\d*\].*)|([\s\S]*))$/m
 	 * 1. escape dots in version: 0\.0\.2
 	 * 2. escape regx for new RegExp()
 	 * 3. capture groups from changelog.match(regx)
@@ -21,7 +21,7 @@ const Changelog = {
 		if (!exists) return;
 		const changelog = await fse.readFile(_path, 'utf8'); // utf8 to return string
 		const vEscaped  = version.replace(/\./g,'\\$&');
-		const regx      = new RegExp(`^(?:#{1,2} \\[${vEscaped}\\].*)(?:([\\s\\S]+?)(?:#{1,2} \\[\\d\\.\\d\\.\\d\\].*)|([\\s\\S]*))$`, 'm');
+		const regx      = new RegExp(`^(?:#{1,2} \\[${vEscaped}\\].*)(?:([\\s\\S]+?)(?:#{1,2} \\[\\d*\\.\\d*\\.\\d*\\].*)|([\\s\\S]*))$`, 'm');
 		const matches   = changelog.match(regx);
 		if (!matches) return;
 		const match = (matches[1] || matches[2]).trim();
