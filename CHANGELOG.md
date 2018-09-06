@@ -1,3 +1,11 @@
+## [0.0.9](https://github.com/rapid-build-ui/utils/compare/v0.0.8...v0.0.9) (2018-09-06)
+
+
+Maintenance only release to fix travis ci from failing.  
+Fixed by downgrading npm from v6.4.1 to v6.1.0 ([602155e](https://github.com/rapid-build-ui/utils/commit/602155e))
+
+
+
 ## [0.0.8](https://github.com/rapid-build-ui/utils/compare/v0.0.7...v0.0.8) (2018-09-06)
 
 
