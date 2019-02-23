@@ -1,3 +1,10 @@
+## [0.0.11](https://github.com/rapid-build-ui/utils/compare/v0.0.10...v0.0.11) (2019-02-23)
+
+
+Release only contains dependency bumps to stay up to date.
+
+
+
 ## [0.0.10](https://github.com/rapid-build-ui/utils/compare/v0.0.9...v0.0.10) (2018-11-13)
 
 
