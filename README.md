@@ -59,12 +59,14 @@ const utils = require('@rapid-build-ui/utils');
 ## API
 All return a promise.
 
-* #### utils.bump.run(type, semver)
+* #### utils.bump.run(type, semver, extraBumpFile = null)
 	* params
 		* type (string): utils | component
 		* semver (string): 1.0.0 | patch | [reference](https://docs.npmjs.com/cli/version)
+		* extraBumpFile (string, optional): file path relative to project root
 	* overview
 		* bump version in all package.json(s)
+		* bump extra file (optional)
 		* update changelog
 
 * #### utils.ci.component.continuous(config)
