@@ -1,6 +1,7 @@
 /****************
  * BUMP VERSIONS
  ****************/
+const path   = require('path');
 const util   = require('util');
 const semver = require('semver');
 const fse    = require('fs-extra');
@@ -10,6 +11,24 @@ const exec   = util.promisify(require('child_process').exec);
 /* Bump
  *******/
 const Bump = {
+	async extraFile(config, extraBumpFile) { // :Promise<boolean>
+		const { paths, versions } = config;
+		const newVersion = versions.new;
+		const bumpFile = path.join(paths.abs.project, extraBumpFile);
+		log.buildStepBegin(`bumping extra file`);
+		try { // regex searches for semver version string (ex: version = '1.0.0'; matches 1.0.0)
+			const vRegx = /(?<=['"`])(\d+)\.(\d+)\.(\d+)(?:(-)([a-z]+)?\.?(?:(\d+)\.?)?(?:(\d+)\.?)?(\d+))?(?=['"`])/gi;
+			let contents = await fse.readFile(bumpFile, 'utf8');
+			contents = contents.replace(vRegx, versions.new);
+			await fse.writeFile(bumpFile, contents);
+			log.buildStepSuccess(`bumped version in ${extraBumpFile}`, { matchCase: true });
+			return true;
+		} catch(e) {
+			log.buildStepError(`bumping version in ${extraBumpFile}`, { after: e, exit: true, matchCase: true });
+			return e;
+		}
+	},
+
 	async pkgs(config) { // :Promise[{}]
 		const { paths, versions } = config;
 		const newVersion = versions.new;
@@ -52,8 +71,7 @@ const Bump = {
 		const newVersion   = versions.new;
 		const showcaseFile = paths.rel.src.showcaseFile;
 		let newVersions = {
-			showcase: newVersion,
-			// components: {} TODO
+			showcase: newVersion
 		};
 		try {
 			let contents = await fse.readFile(showcaseFile, 'utf8');
@@ -117,10 +135,10 @@ const Api = {
 		return result.newVersion;
 	},
 
-	async versions(config) { // :Promise<any>
+	async versions(config, extraBumpFile = null) { // :Promise<any>
 		await Bump.pkgs(config);
-		if (config.type !== 'showcase') return;
-		await Bump.showcaseVersionsFile(config);
+		if (extraBumpFile) await Bump.extraFile(config, extraBumpFile);
+		if (config.type === 'showcase') await Bump.showcaseVersionsFile(config);
 	}
 };
 

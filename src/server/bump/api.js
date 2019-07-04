@@ -9,10 +9,10 @@ const log       = require('../common/logging/log');
 /* Bump
  *******/
 const Bump = {
-	async run(type, bumpVersion) { // :Promise<any>
+	async run(type, bumpVersion, extraBumpFile = null) { // :Promise<any>
 		const config = getConfig(type, bumpVersion);
 		// log.pretty(config, { prefix: 'CONFIG', exit: true });
-		await bump.versions(config);
+		await bump.versions(config, extraBumpFile);
 		await changelog.update();
 	},
 };
