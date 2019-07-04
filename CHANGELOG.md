@@ -1,3 +1,12 @@
+## [0.0.12](https://github.com/rapid-build-ui/utils/compare/v0.0.11...v0.0.12) (2019-07-04)
+
+
+### Features
+
+* **bump task:** add optional extraBumpFile parameter for bumping version(s) in a file ([050145f](https://github.com/rapid-build-ui/utils/commit/050145f))
+
+
+
 ## [0.0.11](https://github.com/rapid-build-ui/utils/compare/v0.0.10...v0.0.11) (2019-02-23)
 
 
