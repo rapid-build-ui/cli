@@ -1,36 +1,36 @@
-# @rapid-build-ui/utils
-Set of automation tasks for Rapid Build UI components, utils and showcase.
+# @rapid-build-ui/cli
+Set of automation tasks for Rapid Build UI cli, components, mixins and showcase.
 
 
 ## Installation
 Run in project root!
 
 ```bash
-$ npm install @rapid-build-ui/utils
+$ npm install @rapid-build-ui/cli
 ```
 
 
 ## How To Use: Option 1
 Simple way, place in project's root package.json scripts property.
 
-#### components
+#### cli
 ```json
 {
   "scripts": {
-    "build-continuous": "node node_modules/@rapid-build-ui/utils/ci component continuous",
-    "build-release": "node node_modules/@rapid-build-ui/utils/ci component release",
-    "bump": "node node_modules/@rapid-build-ui/utils/bump component patch"
+    "build-continuous": "node node_modules/@rapid-build-ui/cli/ci cli continuous",
+    "build-release": "node node_modules/@rapid-build-ui/cli/ci cli release",
+    "bump": "node node_modules/@rapid-build-ui/cli/bump cli patch"
   }
 }
 ```
 
-#### utils
+#### components
 ```json
 {
   "scripts": {
-    "build-continuous": "node node_modules/@rapid-build-ui/utils/ci utils continuous",
-    "build-release": "node node_modules/@rapid-build-ui/utils/ci utils release",
-    "bump": "node node_modules/@rapid-build-ui/utils/bump utils patch"
+    "build-continuous": "node node_modules/@rapid-build-ui/cli/ci component continuous",
+    "build-release": "node node_modules/@rapid-build-ui/cli/ci component release",
+    "bump": "node node_modules/@rapid-build-ui/cli/bump component patch"
   }
 }
 ```
@@ -39,9 +39,9 @@ Simple way, place in project's root package.json scripts property.
 ```json
 {
   "scripts": {
-    "build-continuous": "node node_modules/@rapid-build-ui/utils/ci showcase continuous",
-    "build-release": "node node_modules/@rapid-build-ui/utils/ci showcase release",
-    "bump": "node node_modules/@rapid-build-ui/utils/bump showcase patch"
+    "build-continuous": "node node_modules/@rapid-build-ui/cli/ci showcase continuous",
+    "build-release": "node node_modules/@rapid-build-ui/cli/ci showcase release",
+    "bump": "node node_modules/@rapid-build-ui/cli/bump showcase patch"
   }
 }
 ```
@@ -51,7 +51,7 @@ Simple way, place in project's root package.json scripts property.
 Use the API. The [process.cwd()](https://goo.gl/QS1WtL) must be the project's root path!
 
 ```js
-const utils = require('@rapid-build-ui/utils');
+const cli = require('@rapid-build-ui/cli');
 // See API Documentation
 ```
 
@@ -59,9 +59,9 @@ const utils = require('@rapid-build-ui/utils');
 ## API
 All return a promise.
 
-* #### utils.bump.run(type, semver, extraBumpFile = null)
+* #### cli.bump.run(type, semver, extraBumpFile = null)
 	* params
-		* type (string): utils | component
+		* type (string): cli | component
 		* semver (string): 1.0.0 | patch | [reference](https://docs.npmjs.com/cli/version)
 		* extraBumpFile (string, optional): file path relative to project root
 	* overview
@@ -69,28 +69,28 @@ All return a promise.
 		* bump extra file (optional)
 		* update changelog
 
-* #### utils.ci.component.continuous(config)
+* #### cli.ci.component.continuous(config)
 	* build component
 	* copy root files to: dist/client/ (ex: LICENSE)
 	* trigger showcase ci build
 
-* #### utils.ci.component.release(config)
+* #### cli.ci.component.release(config)
 	* build component
 	* copy root files to: dist/client/
 	* copy npm config to dist/client/
 	* publish npm package from dist/client/
 	* publish github release from master
 
-* #### utils.ci.utils.continuous(config)
+* #### cli.ci.cli.continuous(config)
 	* copy root files to: dist/server/ (ex: LICENSE)
 
-* #### utils.ci.utils.release(config)
+* #### cli.ci.cli.release(config)
 	* copy root files to: dist/server/
 	* copy npm config to dist/server/
 	* publish npm package from dist/server/
 	* publish github release from master
 
-* #### utils.ci.showcase.continuous(config)
+* #### cli.ci.showcase.continuous(config)
 	* create directory for cloned components (.rb-components)
 	* clone component repos (into .rb-components)
 	* setup components
@@ -99,7 +99,7 @@ All return a promise.
 	* create heroku dist/package.json
 	* publish heroku app rapid-build-ui-io-dev
 
-* #### utils.ci.showcase.release(config)
+* #### cli.ci.showcase.release(config)
 	* install client
 	* install server
 	* build showcase
@@ -107,7 +107,7 @@ All return a promise.
 	* publish heroku app rapid-build-ui-io-staging
 	* publish github release from master
 
-* #### utils.ci methods
+* #### cli.ci methods
 ```coffeescript
 # config example
 repo:
@@ -117,7 +117,7 @@ repo:
 tokens:
 	github: 'token' # all projects
 	heroku: 'token' # showcase
-	npm:    'token' # components and utils
+	npm:    'token' # components and cli
 	travis: 'token' # components
 paths:
 	abs: # absolute os paths

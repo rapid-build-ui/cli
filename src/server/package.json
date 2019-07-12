@@ -1,7 +1,7 @@
 {
-  "name": "@rapid-build-ui/utils",
+  "name": "@rapid-build-ui/cli",
   "version": "0.0.12",
-  "description": "Rapid Build UI utilities for components and showcase site.",
+  "description": "Rapid Build UI cli for components, mixins and showcase.",
   "license": "MIT",
   "main": "index.js",
   "engines": {
@@ -25,10 +25,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/rapid-build-ui/utils"
+    "url": "https://github.com/rapid-build-ui/cli"
   },
   "bugs": {
-    "url": "https://github.com/rapid-build-ui/utils/issues"
+    "url": "https://github.com/rapid-build-ui/cli/issues"
   },
   "dependencies": {
     "colors": "^1.3.3",

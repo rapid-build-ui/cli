@@ -22,7 +22,7 @@ const getConfig = () => { // :{}
 		tokens: { // travis web gui -> settings
 			github: env.GITHUB_TOKEN, // all
 			heroku: env.HEROKU_TOKEN, // showcase
-			npm:    env.NPM_TOKEN,    // components and utils
+			npm:    env.NPM_TOKEN,    // components and cli
 			travis: env.TRAVIS_TOKEN  // components
 		},
 		paths: {
