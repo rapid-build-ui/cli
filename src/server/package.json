@@ -1,6 +1,6 @@
 {
   "name": "@rapid-build-ui/cli",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Rapid Build UI cli for components, mixins and showcase.",
   "license": "MIT",
   "main": "index.js",

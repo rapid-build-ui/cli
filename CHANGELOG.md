@@ -1,3 +1,20 @@
+## [0.0.13](https://github.com/rapid-build-ui/cli/compare/v0.0.12...v0.0.13) (2019-07-12)
+
+
+### BREAKING CHANGES
+
+* **package name change:** to @rapid-build-ui/cli from @rapid-build-ui/utils ([c59c105](https://github.com/rapid-build-ui/cli/commit/c59c105))
+
+To migrate the code follow the example below:
+
+**Before:**  
+npm install @rapid-build-ui/utils
+
+**Now:**  
+npm install @rapid-build-ui/cli
+
+
+
 ## [0.0.12](https://github.com/rapid-build-ui/cli/compare/v0.0.11...v0.0.12) (2019-07-04)
 
 

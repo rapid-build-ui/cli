@@ -1,6 +1,6 @@
 {
   "name": "cli-project",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "scripts": {
     "build-continuous": "node dist/server/ci cli continuous",
     "build-release": "node dist/server/ci cli release",
