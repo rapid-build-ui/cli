@@ -1,15 +1,15 @@
-/***************************
- * RAPID BUILD UI UTILITIES
- ***************************/
+/*********************
+ * RAPID BUILD UI CLI
+ *********************/
 require('./common/bootstrap/colors');
 
-/* Utils
- ********/
-const Utils = {
+/* CLI
+ ******/
+const CLI = {
 	bump: require('./bump/api'),
 	ci:   require('./ci/api')
 };
 
 /* Export It!
  *************/
-module.exports = Utils;
+module.exports = CLI;

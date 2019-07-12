@@ -4,6 +4,17 @@
 const ci = require('./steps');
 
 const CI = { // :Promise<any> (all return)
+	cli: {
+		async continuous(config) {
+			await ci.common.copyRootFilesToDist(config, 'server');
+		},
+		async release(config) {
+			await ci.common.copyRootFilesToDist(config, 'server');
+			await ci.common.copyNpmConfigToDist(config, 'server');
+			await ci.common.publishNpmPkg(config, 'server');
+			await ci.common.publishGithubRelease(config);
+		}
+	},
 	component: {
 		async continuous(config) {
 			await ci.common.buildDist(config);
@@ -15,17 +26,6 @@ const CI = { // :Promise<any> (all return)
 			await ci.common.copyRootFilesToDist(config, 'client');
 			await ci.common.copyNpmConfigToDist(config, 'client');
 			await ci.common.publishNpmPkg(config, 'client');
-			await ci.common.publishGithubRelease(config);
-		}
-	},
-	utils: {
-		async continuous(config) {
-			await ci.common.copyRootFilesToDist(config, 'server');
-		},
-		async release(config) {
-			await ci.common.copyRootFilesToDist(config, 'server');
-			await ci.common.copyNpmConfigToDist(config, 'server');
-			await ci.common.publishNpmPkg(config, 'server');
 			await ci.common.publishGithubRelease(config);
 		}
 	},
